@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./root.css">
+  
+  <title>Frontend Mentor | Weather app</title>
+</head>
+<body>
+  <header>
+      <div class="img-container">
+        <img src="./assets/images/logo.svg" alt="logo-Weather-App">
+      </div>
+      <div class="dropdown">
+        <button id="dropdownBtn" class="dropdown-btn"><img class="img-unit" src="./assets/images/icon-units.svg">Units <img class="img-drop" src="./assets/images/icon-dropdown.svg" alt="dropdown"></button>
+        <div id="dropdownMenu" class="dropdown-menu">
+          <h2>Switch to imperial </h2>
+            <div>
+              <h4>Temperature</h4>
+              <div>Celsius(C°)</div>
+              <div>Farenheit(F°)</div>
+            </div>
+            <div>
+              <h4>Wind Speed</h4>
+              <div>Km/h</div>
+              <div>mph</div>
+            </div>
+            <div>
+              <h4>Precipitation</h4>
+              <div>Milimeters(mm)</div>
+            </div>
+        </div>
+      </div>
+
+    </header>
+    <section class="input-section">
+      <div class="question-input-container">How's the sky looking today?</div>
+  
+      <div class="input-container">
+        <img src="./assets/images/icon-search.svg" alt="Search">
+        <input id="cityInput" type="text" placeholder="Search for a place...">
+        <button id="saveBtn">Search</button>
+      </div>
+    </section>
+
+    <section class="grid-weather">
+
+      <article id="main-screen">
+        <div class="city-data">
+          <h2 id="city">hola mundo</h2>
+          <h4 id="date">como va</h4>
+        </div>
+        <div class="c-weather">
+          <img src="./assets/images/icon-rain.webp" alt="">
+          <div id="temperature">20°</div>
+        </div>
+      </article>
+
+      <article class="current-data">
+        
+        <div class="data-card">
+          <h3>Feels like</h3>
+          <div id="feels-like">18</div>
+        </div>
+        <div class="data-card">
+          <h3>Humidity</h3>
+          <div id="humidity"></div>
+        </div>
+        <div class="data-card">
+          <h3>Wind</h3>
+          <div id="wind"></div>
+        </div>
+        <div class="data-card">
+          <h3>Precipitation</h3>
+          <div id="precipitation"></div>
+        </div>
+        
+      </article>
+
+      <article class="future-data">
+        <h2>Daily forecast</h2>
+        <div>
+
+          <div class="data-card-daily">
+            <div class="day">Tue</div>
+            <img src="./assets/images/icon-overcast.webp" alt="Weather">
+            <div id="initial-grade">29</div>
+            <div id="final-grade">40</div>
+          </div>
+          <div class="data-card-daily">
+            <div class="day"></div>
+            <img src="" alt="Weather">
+            <div id="initial-grade"></div>
+            <div id="final-grade"></div>
+          </div>
+          <div class="data-card-daily">
+            <div class="day"></div>
+            <img src="" alt="Weather">
+            <div id="initial-grade"></div>
+            <div id="final-grade"></div>
+          </div>
+          <div class="data-card-daily">
+            <div class="day"></div>
+            <img src="" alt="Weather">
+            <div id="initial-grade"></div>
+            <div id="final-grade"></div>
+          </div>
+          <div class="data-card-daily">
+            <div class="day"></div>
+            <img src="" alt="Weather">
+            <div id="initial-grade"></div>
+            <div id="final-grade"></div>
+          </div>
+          <div class="data-card-daily">
+            <div class="day"></div>
+            <img src="" alt="Weather">
+            <div id="initial-grade"></div>
+            <div id="final-grade"></div>
+          </div>
+          <div class="data-card-daily">
+            <div class="day"></div>
+            <img src="" alt="Weather">
+            <div id="initial-grade"></div>
+            <div id="final-grade"></div>
+          </div>
+
+        </div>
+
+
+      </article>
+
+      <article class="hourly-future-data">
+        <div class="hourly-title">
+          <h2>Hourly Forecast</h2>
+          <button id="dropdownDayButton">Tuesday <img src="./assets/images/icon-dropdown.svg" alt="dropdown"></button>
+          <div id="dropdownDayMenu" class="dropdown-day-menu">
+            <!--completar-->
+          </div>
+        </div>
+
+
+        <div class="hourly-container">
+          
+          <div class="hourly-block">
+            <div>
+              <img src="./assets/images/icon-drizzle.webp" alt="">
+              <div class="hour">3 PM</div>
+            </div>
+            <div class="hour-grade">20°</div>
+          </div>
+          <div class="hourly-block">
+            <div>
+              <img src="./assets/images/icon-drizzle.webp" alt="">
+              <div class="hour">3 PM</div>
+            </div>
+            <div class="hour-grade">20°</div>
+          </div>
+          <div class="hourly-block">
+            <div>
+              <img src="./assets/images/icon-drizzle.webp" alt="">
+              <div class="hour">3 PM</div>
+            </div>
+            <div class="hour-grade">20°</div>
+          </div>
+          <div class="hourly-block">
+            <div>
+              <img src="./assets/images/icon-drizzle.webp" alt="">
+              <div class="hour">3 PM</div>
+            </div>
+            <div class="hour-grade">20°</div>
+          </div>
+          <div class="hourly-block">
+            <div>
+              <img src="./assets/images/icon-drizzle.webp" alt="">
+              <div class="hour">3 PM</div>
+            </div>
+            <div class="hour-grade">20°</div>
+          </div>
+          <div class="hourly-block">
+            <div>
+              <img src="./assets/images/icon-drizzle.webp" alt="">
+              <div class="hour">3 PM</div>
+            </div>
+            <div class="hour-grade">20°</div>
+          </div>
+          <div class="hourly-block">
+            <div>
+              <img src="./assets/images/icon-drizzle.webp" alt="">
+              <div class="hour">3 PM</div>
+            </div>
+            <div class="hour-grade">20°</div>
+          </div>
+          <div class="hourly-block">
+            <div>
+              <img src="./assets/images/icon-drizzle.webp" alt="">
+              <div class="hour">3 PM</div>
+            </div>
+            <div class="hour-grade">20°</div>
+          </div>
+
+        </div>
+      </article>
+
+
+    </section>
+</body>
+<script src="./index.js"></script>
+</html>
