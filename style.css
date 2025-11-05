@@ -76,6 +76,9 @@ header{
     border-radius: 5px;
     padding: 0 2%;
 }
+#saveBtn{
+    cursor: pointer;
+}
 .input-container > input::placeholder{
     color: var(--Neutral-300);
     padding-left: 40px;
