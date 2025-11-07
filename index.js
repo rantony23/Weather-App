@@ -29,7 +29,7 @@ class WeatherApi{
     async getCity(city){
         const location =  await this.#cityFetchData(city);
         if(!location)return null;
-        let baseURL =`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&daily=temperature_2m_max,temperature_2m_min,sunrise,weather_code&hourly=temperature_2m,relative_humidity_2m,precipitation,wind_speed_80m,apparent_temperature,weather_code&models=icon_seamless&current=temperature_2m,weather_code,apparent_temperature,precipitation,relative_humidity_2m,wind_speed_10m&timezone=America%2FChicago&temperature_unit=fahrenheit`
+        let baseURL =`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&daily=temperature_2m_max,temperature_2m_min,sunrise,weather_code&hourly=temperature_2m,relative_humidity_2m,precipitation,wind_speed_80m,apparent_temperature,weather_code&models=icon_seamless&current=temperature_2m,weather_code,apparent_temperature,precipitation,relative_humidity_2m,wind_speed_10m&timezone=auto&temperature_unit=fahrenheit`
 
         const cityData = await this.#fetchData(baseURL);
         return cityData;
@@ -51,8 +51,62 @@ class WeatherApi{
 };
 
 const weather = new WeatherApi();
-weather.getCity("Chicago")
-    .then(data => console.log(data)).catch(err => console.error(err));
+
+window.addEventListener("DOMContentLoaded", async() =>{
+    const defaultCity = "chicago";
+    initiazation(defaultCity);
+})
+
+async function initiazation(savedCity) {
+    try {
+        apiData = await weather.getCity(savedCity);
+        cityApiData = await weather.nameCity(savedCity);
+        city.textContent = `${cityApiData.city}, ${cityApiData.country}`;
+        data.textContent = formattingDate(apiData.current.time);
+        temperature.textContent = `${Math.ceil(apiData.current.temperature_2m)}°`;
+        feelsLike.textContent =  `${apiData.current.apparent_temperature}°`;
+        humidity.textContent = `${apiData.current.relative_humidity_2m}%`;
+        wind.textContent = `${apiData.current.wind_speed_10m} Km/h `;
+        precipitation.textContent = `${apiData.current.precipitation} mm`;
+        elemDays.map( (elem, index) =>{
+            elem.textContent = formattingDate(apiData.daily.time[index], true);
+    
+        });
+        elemDayImgs.map( (elem, index) =>{
+            elem.src = setImg(apiData.daily.weather_code[index]);
+            
+        });
+        elemMinGrade.map((elem, index) =>{
+            elem.textContent = `${Math.ceil(apiData.daily.temperature_2m_min[index])}°`;
+        });
+        elemMaxGrade.map((elem, index) =>{
+            elem.textContent = `${Math.ceil(apiData.daily.temperature_2m_max[index])}°`;
+        });
+    
+        const horaActual = await getHour(apiData.current.time, apiData.timeZone);
+        let initialValue = horaActual;
+        elemHourForecast.map((elem, index) =>{
+            const apiIndex = initialValue + index;
+            let value = `${getHour(apiData.hourly.time[apiIndex], apiData.timeZone)}`;
+            elem.textContent = formatHour(value);
+        });
+    
+        elemHourImg.map((elem, index) =>{
+            const apiIndex = initialValue + index;
+            elem.src = setImg(apiData.hourly.weather_code[apiIndex]);
+        });
+    
+        elemHourGrade.map((elem,index) =>{
+            const apiIndex = initialValue + index;
+            elem.textContent = `${Math.ceil(apiData.hourly.temperature_2m[apiIndex])}°`;
+        })
+     
+        
+    } catch (error) {
+        console.log(error);
+    }
+    
+}
 
 let cityInput = document.getElementById("cityInput");
 let saveBtn = document.getElementById("saveBtn");
@@ -67,50 +121,57 @@ let days = document.querySelectorAll(".day");
 let dayImgs = document.querySelectorAll(".data-card-daily img");
 const elemDayImgs = Array.from(dayImgs);
 const elemDays = Array.from(days);
+const minGrade = document.querySelectorAll(".min-grade");
+const maxGrade = document.querySelectorAll(".max-grade");
+const hourForecast = document.querySelectorAll(".hour");
+const hourImg = document.querySelectorAll(".hourly-block img");
+const hourGrade = document.querySelectorAll(".hour-grade");
 
+const elemHourGrade = Array.from(hourGrade);
+const elemHourImg = Array.from(hourImg);
+const elemHourForecast = Array.from(hourForecast);
+const elemMinGrade = Array.from(minGrade);
+const elemMaxGrade = Array.from(maxGrade);
 
 // make suggestion input
 
 saveBtn.addEventListener("click", async () =>{
     const savedCity = cityInput.value ;
-    try {
-        apiData = await weather.getCity(savedCity);
-        cityApiData = await weather.nameCity(savedCity);
-        city.textContent = `${cityApiData.city}, ${cityApiData.country}`;
-        data.textContent = formattingDate(apiData.current.time);
-        temperature.textContent = apiData.current.temperature_2m;
-        feelsLike.textContent =  `${apiData.current.apparent_temperature}°`;
-        humidity.textContent = `${apiData.current.relative_humidity_2m}%`;
-        wind.textContent = `${apiData.current.wind_speed_10m} Km/h `;
-        precipitation.textContent = `${apiData.current.precipitation} mm`;
-        elemDays.map( (elem, index) =>{
-            elem.textContent = formattingDate(apiData.daily.time[index], true);
-
-        });
-        elemDayImgs.map( (elem, index) =>{
-            elem.src = setImg(apiData.daily.weather_code[index]);
-        });
-        console.log(apiData.daily.time[0]); // mira qué fecha trae realmente
-
-        
-        
-    } catch (error) {
-        console.log(error);
-    }
+    initiazation(savedCity);
 
 });
 
+function getHour(raw, timeZone){
+    const date =  new Date(raw);
+    const option = {hour:"numeric",
+        timeZone: timeZone,
+        hourCycle: "h23",
+    }
+    const hour = date.toLocaleTimeString("en-US", option);
+    return parseInt(hour, 10);
+}
+
+function formatHour(number){
+    const suffix = number >=12 ?"PM":"AM";
+    let hour = number % 12;
+    if( hour === 0 ) hour = 12;
+    return `${hour} ${suffix}`;
+}
 
 function formattingDate(raw, onlyDay = false){
-    const date = new Date(raw + "T12:00:00");
     if(onlyDay){
-        return date.toLocaleDateString("en-US",{weekday:"short"});
+        const date = new Date(raw.substring(0,10) + "T12:00:00Z");
+        return date.toLocaleDateString("en-US",{weekday:"short",
+            timeZone: "UTC",
+        });
     }else {
+        const date = new Date(raw + ":00Z");
         const options = {
             weekday: "long",
             month: "short",
             day: "numeric",
             year: "numeric",
+            timeZone:"UTC",
         };
     
         return date.toLocaleDateString("en-US", options);
@@ -122,7 +183,7 @@ function setImg(index) {
         "./assets/images/icon-overcast.webp",     // 0
         "./assets/images/icon-drizzle.webp",      // 1
         "./assets/images/icon-fog.webp",          // 2
-        "./assets/images/icon-party-cloudy.webp", // 3
+        "./assets/images/icon-partly-cloudy.webp", // 3
         "./assets/images/icon-rain.webp",         // 4
         "./assets/images/icon-snow.webp",         // 5
         "./assets/images/icon-storm.webp",        // 6
