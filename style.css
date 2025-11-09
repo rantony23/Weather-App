@@ -22,6 +22,57 @@ header{
     padding: 0 14%;
     margin-top: 15px;
 }
+/* api error state */
+
+#api-error-state{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#api-error-state > div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#api-error-state > div > img{
+    width: 30px;
+    height: auto;
+}
+#api-error-state > h1{
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+}
+#api-error-state > h4{
+    width: 100%;
+    text-align: center;
+    color: var(--Neutral-300);
+    font-weight: 200;
+    font-size: 15px;
+    margin-top: 1rem;
+}
+#retry{
+    background-color: var(--Neutral-800);
+    color: white;
+    width: 5rem ;
+    border: none;
+    height: 1.5rem;
+    border-radius: 5px;
+    font-size: small;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+.img-retry{
+    width: 10px;
+    height: auto;
+    margin-right: 5px;
+}
+#api-error-state.invisible,
+.grid-weather.invisible,
+.input-section.invisible{
+    display: none;
+}
+
 
 /* loading state */
 .main-screen.loading-state.container {

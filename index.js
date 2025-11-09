@@ -108,6 +108,11 @@ async function initiazation(savedCity) {
         
     } catch (error) {
         console.log(error);
+        apiErrorState.classList.remove("invisible");
+        elemSection.forEach(elem =>{
+            elem.classList.add("invisible");
+        })
+
     }
     
 }
@@ -131,12 +136,18 @@ const hourForecast = document.querySelectorAll(".hour");
 const hourImg = document.querySelectorAll(".hourly-block img");
 const hourGrade = document.querySelectorAll(".hour-grade");
 const loadingState = document.querySelectorAll(".loading-state");
+const apiErrorState = document.getElementById("api-error-state");
+const retryBtn = document.getElementById("retry");
+const section = document.querySelectorAll(".section");
 
+const elemSection = Array.from(section);
 const elemHourGrade = Array.from(hourGrade);
 const elemHourImg = Array.from(hourImg);
 const elemHourForecast = Array.from(hourForecast);
 const elemMinGrade = Array.from(minGrade);
 const elemMaxGrade = Array.from(maxGrade);
+
+
 
 // make suggestion input
 
@@ -145,6 +156,10 @@ saveBtn.addEventListener("click", async () =>{
     initiazation(savedCity);
 
 });
+
+retryBtn.addEventListener("click", ()=>{
+    location.reload();
+})
 
 function getHour(raw, timeZone){
     const date =  new Date(raw);
@@ -228,5 +243,6 @@ function setImg(index) {
 
     return icon;
 };
+
 
 

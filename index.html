@@ -11,6 +11,7 @@
   <title>Frontend Mentor | Weather app</title>
 </head>
 <body>
+  </section>
   <header>
       <div class="img-container">
         <img src="./assets/images/logo.svg" alt="logo-Weather-App">
@@ -37,7 +38,21 @@
       </div>
 
     </header>
-    <section class="input-section">
+
+    <section id="api-error-state" class="invisible">
+      <div>
+        <img src="./assets/images/icon-error.svg" alt="">
+      </div>
+      <h1>Something Went Wrong</h1>
+      <h4>we couldn't connect to the server (API error). Please try
+        <br>
+        again in a few moments.
+      </h4>
+      <button id="retry"><img class="img-retry" src="./assets/images/icon-retry.svg" alt="retry">Retry</button>
+    </section>
+
+
+    <section class="input-section section">
       <div class="question-input-container">How's the sky looking today?</div>
   
       <div class="input-container">
@@ -47,7 +62,7 @@
       </div>
     </section>
 
-    <section class="grid-weather">
+    <section class="grid-weather section">
 
       <article id="main-screen" class="loading-state container main-screen">
         <div class="city-data">
