@@ -55,6 +55,7 @@ const weather = new WeatherApi();
 window.addEventListener("DOMContentLoaded", async() =>{
     const defaultCity = "chicago";
     initiazation(defaultCity);
+
 })
 
 async function initiazation(savedCity) {
@@ -99,6 +100,9 @@ async function initiazation(savedCity) {
         elemHourGrade.map((elem,index) =>{
             const apiIndex = initialValue + index;
             elem.textContent = `${Math.ceil(apiData.hourly.temperature_2m[apiIndex])}°`;
+        });
+        loadingState.forEach(elem =>{
+            elem.classList.remove("loading-state");
         })
      
         
@@ -126,6 +130,7 @@ const maxGrade = document.querySelectorAll(".max-grade");
 const hourForecast = document.querySelectorAll(".hour");
 const hourImg = document.querySelectorAll(".hourly-block img");
 const hourGrade = document.querySelectorAll(".hour-grade");
+const loadingState = document.querySelectorAll(".loading-state");
 
 const elemHourGrade = Array.from(hourGrade);
 const elemHourImg = Array.from(hourImg);

@@ -23,6 +23,70 @@ header{
     margin-top: 15px;
 }
 
+/* loading state */
+.main-screen.loading-state.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--Neutral-800);
+    overflow: hidden;
+}
+.loading-state.div{
+    position: relative;
+}
+.loading-state.div::before,
+.loading-state.div::after{
+    content: "";
+    position: absolute;
+    top: 3rem;
+    width: 12px;
+    height: 12px;
+    background-color: var(--Neutral-300);
+    animation: bounce 0.8s infinite ease-in-out;
+}
+.loading-state.div:before{
+    left: 20%;
+    border-radius: 50%;
+    animation-delay: 0s;
+}
+.loading-state.div::after{
+    right: 0%;
+    animation-delay: 0.3s;
+    border-radius: 50%;
+}
+.loading-state.div > .loading-state.text{
+    font-size: 1rem ;
+    margin-top: 4rem;
+    position: relative;
+    left: 0.5rem;
+}
+.loading-state.container::before{
+    content: "";
+    position: absolute;
+    bottom: 6rem;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--Neutral-300);
+    animation: bounce 0.8s infinite ease-in-out;
+    animation-delay: 0.6s;
+}
+@keyframes bounce{
+    0%,100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50%{
+        transform: translateY(-5px);
+        opacity: 0.7s;
+    }
+}
+
+
 .img-container > img{
     height: 2rem;
 }
@@ -113,7 +177,7 @@ header{
     width: 90%;
     padding: 0 10%;
 }
-#main-screen{
+.main-screen{
     grid-column: 1;
     grid-row: 1;
     background-image: url(./assets/images/bg-today-large.svg);
@@ -136,7 +200,7 @@ header{
     height: 80px;
     width: auto;
 }
-#temperature{
+.tempera{
     font-size: 5rem;
 }
 .city-data > h2{
