@@ -141,8 +141,12 @@ header{
 .img-container > img{
     height: 2rem;
 }
-#dropdownMenu{
-    display: none;
+
+/* Dropdown btn*/
+
+.dropdown{
+    display: inline-block;
+    position: relative;
 }
 .dropdown-btn{
     background-color: var(--Neutral-800);
@@ -154,6 +158,57 @@ header{
     font-size: small;
     cursor: pointer;
 }
+.dropdown-menu{
+    position: absolute;
+    background-color: var(--Neutral-800);
+    color: white;
+    min-height: 160px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    width: 12rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    right: 0;
+    top: 2.5rem;
+    display: none;
+}
+.dropdown-menu.active{
+    display: block;
+}
+.dropdown-menu > h2{
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+.dropdown-menu > div{
+    display: flex;
+    flex-direction: column;
+}
+.dropdown-menu > hr{
+    display: inline-block;
+    color: white;
+    height: px;
+    opacity: 0.2;
+    margin: 10px 0;
+}
+.dropdown-menu > div > button{
+    background-color: var(--Neutral-800);
+    border: none;
+    cursor: pointer;
+    color: white;
+    text-align: start;
+    padding: 0.3rem 0;
+    transition: background 0.2s ease-in-out;
+    border-radius: 5px;
+}
+.dropdown-menu > div > button:hover{
+    background-color: var(--Neutral-700);
+}
+.dropdown-menu > div > button:active {
+    background-color: var(--Neutral-700);
+}
+
 .img-unit{
     height: 10px;
     padding-right: 5px;
@@ -180,7 +235,29 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    position: relative;
+}
+/*recien agrergado*/
+.suggestions{
+    position: absolute;
+    top: 70%;
+    right: 39%;
+    width: 25%;
+    height: auto;
+    background: var(--Neutral-800);
+    border: none;
+    border-radius: 8px;
+    max-height: 200px;
+
+    display: none;
+    z-index: 10;
+}
+.suggestions > div{
+    padding: 10px;
+    cursor: pointer;
+}
+.suggestions div:hover{
+    background: var(--Neutral-700);
 }
 .input-container > input{
     width: 25%;
@@ -373,9 +450,6 @@ header{
     height: 10%;
     align-items: center;
 }
-#dropdownDayMenu{
-    display: none;
-}
 #dropdownDayButton{
     background-color: var(--Neutral-600);
     color: white;
@@ -385,7 +459,44 @@ header{
     border-radius: 5px;
     font-size: small;
     cursor: pointer;
-
+}
+.dropdown-day-menu{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    background-color: var(--Neutral-700);
+    min-height: 160px;
+    width: 10rem;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    padding: 0.5rem;
+    right: 18rem;
+    top: 22rem;
+    border: 1px solid rgba(255,255,255, 0.1);
+    display: none;
+}
+.dropdown-day-menu > button{
+    width: 90%;
+    border-radius: 5px;
+    background-color: var(--Neutral-700);
+    color: white;
+    border: none;
+    text-align: start;
+    margin: 0.1rem 0;
+    height: 1.5rem;
+    transition: background 0.2s ease-in-out;
+}
+.dropdown-day-menu.show{
+    display: block;
+}
+.dropdown-day-menu > button:hover {
+    background-color: var(--Neutral-600);
+}
+.dropdown-day-menu > button:active{
+    background-color: var(--Neutral-600);
 }
 .hourly-container{
     display: flex;
@@ -405,6 +516,9 @@ header{
     border-radius: 10px;
     height: 3.5rem;
 }
+.close-dropdown{
+    display: none;
+}
 .hourly-block > div{
     display: flex;
     align-items: center;
@@ -413,3 +527,4 @@ header{
     width: 40px;
     height: auto;
 }
+

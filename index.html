@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./root.css">
-  
+  <link rel="stylesheet" href="./mobie.css">
   <title>Frontend Mentor | Weather app</title>
 </head>
 <body>
@@ -19,17 +19,18 @@
       <div class="dropdown">
         <button id="dropdownBtn" class="dropdown-btn"><img class="img-unit" src="./assets/images/icon-units.svg">Units <img class="img-drop" src="./assets/images/icon-dropdown.svg" alt="dropdown"></button>
         <div id="dropdownMenu" class="dropdown-menu">
-          <h2>Switch to imperial </h2>
+          <button class="close-dropdown">x</button>
+          <h2>imperial </h2>
             <div>
               <h4>Temperature</h4>
-              <div>Celsius(C°)</div>
-              <div>Farenheit(F°)</div>
+              <button id="btnFarenheit">Farenheit(F°)</button>
             </div>
+            <hr>
             <div>
               <h4>Wind Speed</h4>
-              <div>Km/h</div>
-              <div>mph</div>
+              <button id="btnKm">Km/h</button>
             </div>
+            <hr>
             <div>
               <h4>Precipitation</h4>
               <div>Milimeters(mm)</div>
@@ -59,6 +60,7 @@
         <img src="./assets/images/icon-search.svg" alt="Search">
         <input id="cityInput" type="text" placeholder="Search for a place...">
         <button id="saveBtn">Search</button>
+        <div id="suggestions" class="suggestions"></div>
       </div>
     </section>
 
@@ -147,22 +149,28 @@
 
 
       </article>
-
       <article class="hourly-future-data">
         <div class="hourly-title">
           <h2>Hourly Forecast</h2>
-          <button id="dropdownDayButton">- <img src="./assets/images/icon-dropdown.svg" alt="dropdown"></button>
+          <button id="dropdownDayButton">Units
+             <img src="./assets/images/icon-dropdown.svg" alt="dropdown">
+          </button>
           <div id="dropdownDayMenu" class="dropdown-day-menu">
-            <!--completar-->
+            <button class="close-dropdown">x</button>
+            <button class="day-btn" data-day="monday">Monday</button>
+            <button class="day-btn" data-day="tuesday">Tuesday</button>
+            <button class="day-btn" data-day="wednesday">Wednesday</button>
+            <button class="day-btn" data-day="thursday">Thursday</button>
+            <button class="day-btn" data-day="friday">Friday</button>
+            <button class="day-btn" data-day="saturday">Saturday</button>
+            <button class="day-btn" data-day="sunday">Sunday</button>
           </div>
         </div>
-
-
         <div class="hourly-container">
           
           <div class="hourly-block">
             <div>
-              <img src="s" alt="">
+              <img src="" alt="">
               <div class="hour"></div>
             </div>
             <div class="hour-grade"></div>

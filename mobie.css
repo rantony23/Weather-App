@@ -1,0 +1,112 @@
+@media (max-width:600px){
+    .input-section{
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        
+    }
+    .question-input-container{
+        width: 60%;
+        font-size: 2.5rem;
+    }
+    .input-container{
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        justify-items: center;
+    }
+    .input-container > input{
+        width: 95%;
+        padding: 0;
+        margin-top: 1.5rem;
+    }
+    .input-container > input::placeholder{
+        padding-left: 7rem;
+    }
+    .input-container > img{
+        position: absolute;
+        left: 10%;
+        width: 5%;
+    }
+    .input-container > button{
+        width: 95%;
+        margin: 0;
+        margin-top: 1rem;
+    }
+    
+   .grid-weather{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-top: 3rem;
+   } 
+   .main-screen{
+    height: 25vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+   }
+   .current-data{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    gap: 10px;
+    height: 30vh;
+   }
+   .future-data{
+    display: flex;
+    flex-wrap: wrap;
+   }
+   .future-data > div{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+   }
+   .hourly-future-data{
+    width: 100%;
+    margin-bottom: 200px;
+   }
+   header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+   }
+   .dropdown-day-menu.show,
+   .dropdown-menu.active{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+   }
+   .dropdown-day-menu.show::before,
+   .dropdown-menu.active::before{
+    content: '';
+   }
+   .close-dropdown{
+    display: block;
+    position: relative;
+    right: 0;
+    border: none;
+    background-color: var(--Neutral-800);
+    color: white;
+    right: -19rem;
+    font-size: 30px;
+    cursor: pointer;
+   }
+}

@@ -1,4 +1,23 @@
 class WeatherApi{
+
+    async fetchSuggestions(city) {
+        const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=10&language=en&format=json`;
+
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+
+            if (!data.results) {
+             suggestions.style.display = "none";
+                return;
+            }
+
+            renderSuggestions(data.results);
+
+        } catch (err) {
+           console.log("Error:", err);
+        }
+    }
     
 
     async #cityFetchData(city){
@@ -25,6 +44,7 @@ class WeatherApi{
             country:location.country,
         };
     }
+
 
     async getCity(city){
         const location =  await this.#cityFetchData(city);
@@ -62,6 +82,7 @@ async function initiazation(savedCity) {
     try {
         apiData = await weather.getCity(savedCity);
         cityApiData = await weather.nameCity(savedCity);
+        console.log(apiData);
         city.textContent = `${cityApiData.city}, ${cityApiData.country}`;
         data.textContent = formattingDate(apiData.current.time);
         temperature.textContent = `${Math.ceil(apiData.current.temperature_2m)}°`;
@@ -103,7 +124,7 @@ async function initiazation(savedCity) {
         });
         loadingState.forEach(elem =>{
             elem.classList.remove("loading-state");
-        })
+        });
      
         
     } catch (error) {
@@ -111,13 +132,14 @@ async function initiazation(savedCity) {
         apiErrorState.classList.remove("invisible");
         elemSection.forEach(elem =>{
             elem.classList.add("invisible");
-        })
+        });
 
     }
     
 }
 
 let cityInput = document.getElementById("cityInput");
+const suggestionsInput = document.getElementById("suggestions");
 let saveBtn = document.getElementById("saveBtn");
 let city = document.getElementById("city");
 let data = document.getElementById("date");
@@ -139,6 +161,16 @@ const loadingState = document.querySelectorAll(".loading-state");
 const apiErrorState = document.getElementById("api-error-state");
 const retryBtn = document.getElementById("retry");
 const section = document.querySelectorAll(".section");
+const dropdownBtnUnits = document.getElementById("dropdownMenu");
+const dropdownBtn = document.getElementById("dropdownBtn");
+const dropdownDayMenu = document.getElementById("dropdownDayMenu");
+const dropdownDayMenuBtn = document.getElementById("dropdownDayButton");
+const closeBtn = document.querySelectorAll(".close-dropdown");
+const suggestionItem = document.querySelectorAll(".suggestion-item");
+const btnCelsius = document.getElementById("btnCelsius");
+const btnFaranheit = document.getElementById("btnFaranheit");
+
+
 
 const elemSection = Array.from(section);
 const elemHourGrade = Array.from(hourGrade);
@@ -149,7 +181,56 @@ const elemMaxGrade = Array.from(maxGrade);
 
 
 
-// make suggestion input
+dropdownBtn.addEventListener("click", () => {
+  dropdownBtnUnits.classList.toggle("active");
+});
+dropdownDayMenuBtn.addEventListener("click", () =>{
+    dropdownDayMenu.classList.toggle("show");
+})
+closeBtn.forEach( btn =>{
+    btn.addEventListener("click",()=>{
+        btn.parentElement.classList.remove("show","active");    })
+})
+
+
+let debouncerTimer;
+
+cityInput.addEventListener("input", () =>{
+    clearTimeout(debouncerTimer);
+
+    const query = cityInput.value.trim();
+    if (query.length < 2){
+        suggestionsInput.style.display = "none";
+        return;
+    }
+    debouncerTimer = setTimeout(() =>{
+        weather.fetchSuggestions(query);
+    },300);
+});
+
+function renderSuggestions(list){
+    suggestionsInput.innerHTML = "";
+    if(list.lenght === 0){
+        suggestionsInput.style.display = "none";
+        return;
+    }
+
+    suggestionsInput.style.display = "block";
+    list.slice(0,5).forEach( elem => {
+        const div = document.createElement("div");
+        div.classList.add("suggestion-item");
+        div.textContent = `${elem.name}, ${elem.country}`;
+        div.addEventListener("click", () =>{
+            cityInput.value = div.textContent;
+            initiazation(div.textContent);
+            suggestionsInput.style.display = "none";
+        })
+
+        suggestionsInput.appendChild(div);
+
+    });
+
+}
 
 saveBtn.addEventListener("click", async () =>{
     const savedCity = cityInput.value ;
